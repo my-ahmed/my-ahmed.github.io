@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mohammad Ahmed — Software Engineer building full-stack apps and open source tools.">
+  <title>Mohammad Ahmed</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0d1117;
+      --surface:     #161b22;
+      --surface2:    #21262d;
+      --border:      #30363d;
+      --text:        #e6edf3;
+      --muted:       #8b949e;
+      --accent:      #58a6ff;
+      --accent-dim:  #1f6feb;
+      --green:       #3fb950;
+      --purple:      #bc8cff;
+      --orange:      #d29922;
+      --red:         #f85149;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,17,23,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand { font-weight: 600; font-size: 0.95rem; color: var(--text); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.875rem;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.1rem;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.2rem;
+    }
+    .hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.15s;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .btn:hover { text-decoration: none; }
+    .btn-primary {
+      background: var(--accent-dim);
+      border-color: rgba(88,166,255,0.5);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #388bfd; border-color: var(--accent); }
+    .btn-outline {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text);
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .skill {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border: 1px solid;
+    }
+    .skill.blue   { background: rgba(88,166,255,.1);  border-color: rgba(88,166,255,.25);  color: #79c0ff; }
+    .skill.green  { background: rgba(63,185,80,.1);   border-color: rgba(63,185,80,.25);   color: #56d364; }
+    .skill.purple { background: rgba(188,140,255,.1); border-color: rgba(188,140,255,.25); color: #d2a8ff; }
+    .skill.orange { background: rgba(210,153,34,.1);  border-color: rgba(210,153,34,.25);  color: #e3b341; }
+    .skill.red    { background: rgba(248,81,73,.1);   border-color: rgba(248,81,73,.25);   color: #ff7b72; }
+
+    /* ── PROJECT GRID ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      border-color: var(--accent-dim);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .card-links { display: flex; gap: 0.4rem; }
+    .card-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+    .card-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      background: var(--surface2);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .card-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      color: var(--green);
+      font-weight: 500;
+    }
+    .card-live::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .hero, .section { padding-left: 1rem; padding-right: 1rem; }
+      .hero { padding-top: 4rem; padding-bottom: 3rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">Mohammad Ahmed</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+  </ul>
+</nav>
+
+<!-- HERO / ABOUT -->
+<div class="hero" id="about">
+  <p class="hero-eyebrow">Hey, I'm</p>
+  <h1><span>Mohammad Ahmed</span></h1>
+  <p>Software engineer building full-stack apps — from RAG-powered AI backends to social platforms and developer tools.</p>
+  <div class="hero-cta">
+    <a href="https://github.com/my-ahmed" class="btn btn-primary" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+      GitHub
+    </a>
+    <a href="mailto:m.yaseerahmed@gmail.com" class="btn btn-outline">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email
+    </a>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <span class="skill blue">Python</span>
+    <span class="skill blue">JavaScript</span>
+    <span class="skill blue">TypeScript</span>
+    <span class="skill green">React</span>
+    <span class="skill green">Next.js</span>
+    <span class="skill green">Node.js</span>
+    <span class="skill purple">Machine Learning</span>
+    <span class="skill purple">AI / LLMs</span>
+    <span class="skill purple">RAG / Vector Search</span>
+    <span class="skill orange">FastAPI</span>
+    <span class="skill orange">PostgreSQL</span>
+    <span class="skill orange">Redis</span>
+    <span class="skill red">Docker</span>
+    <span class="skill red">Microservices</span>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <h2 class="section-title">Projects</h2>
+  <div class="projects-grid">
+
+    <!-- urage -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(88,166,255,0.12);">🧠</div>
+        <div class="card-links">
+          <a href="https://rag-smoky.vercel.app" class="card-link" target="_blank" rel="noopener" title="Live demo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+          <a href="https://github.com/my-ahmed/yaz-projects/tree/main/urage" class="card-link" target="_blank" rel="noopener" title="Source code">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+        </div>
+      </div>
+      <h3>urage</h3>
+      <span class="card-live">Live</span>
+      <p>FastAPI backend for a custom RAG implementation with pgvector embeddings, Redis caching, OAuth, and PostgreSQL persistence — built for semantic product search.</p>
+      <div class="card-tags">
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">pgvector</span>
+        <span class="tag">Redis</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">RAG</span>
+      </div>
+    </div>
+
+    <!-- urftnd -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(63,185,80,0.12);">⚡</div>
+        <div class="card-links">
+          <a href="https://rag-smoky.vercel.app" class="card-link" target="_blank" rel="noopener" title="Live demo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+          <a href="https://github.com/my-ahmed/yaz-projects/tree/main/urftnd" class="card-link" target="_blank" rel="noopener" title="Source code">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+        </div>
+      </div>
+      <h3>urftnd</h3>
+      <span class="card-live">Live</span>
+      <p>Next.js frontend for the RAG application — TypeScript, Tailwind CSS, and a clean component architecture for querying the urage semantic search backend.</p>
+      <div class="card-tags">
+        <span class="tag">Next.js</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Tailwind CSS</span>
+        <span class="tag">Node.js</span>
+      </div>
+    </div>
+
+    <!-- knydc -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(210,153,34,0.12);">📍</div>
+        <div class="card-links">
+          <a href="https://github.com/my-ahmed/yaz-projects/tree/main/knydc-1" class="card-link" target="_blank" rel="noopener" title="Source code">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+        </div>
+      </div>
+      <h3>knydc</h3>
+      <p>Address generator and validator web application — generates valid addresses and validates input against a PostgreSQL-backed dataset, served via a Python web framework.</p>
+      <div class="card-tags">
+        <span class="tag">Python</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Flask</span>
+      </div>
+    </div>
+
+    <!-- yui -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(188,140,255,0.12);">🐦</div>
+        <div class="card-links">
+          <a href="https://github.com/my-ahmed/yaz-projects/tree/main/yaz" class="card-link" target="_blank" rel="noopener" title="Source code">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+        </div>
+      </div>
+      <h3>YUI Social Platform</h3>
+      <p>Twitter-style community platform with content sharing, marketplace listings, and a microservices architecture — separate auth, chat, and content services.</p>
+      <div class="card-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Microservices</span>
+        <span class="tag">Auth Service</span>
+        <span class="tag">Chat Service</span>
+        <span class="tag">Content Service</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built with GitHub Pages · <a href="https://github.com/my-ahmed/my-ahmed.github.io" target="_blank" rel="noopener">View source</a></p>
+</footer>
+
+</body>
+</html>
