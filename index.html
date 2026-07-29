@@ -255,6 +255,22 @@
       background: var(--green);
       animation: pulse 2s infinite;
     }
+    .card-beta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      color: var(--orange);
+      font-weight: 500;
+    }
+    .card-beta::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: pulse 2s infinite;
+    }
     @keyframes pulse {
       0%, 100% { opacity: 1; }
       50%       { opacity: 0.4; }
@@ -333,6 +349,28 @@
 <section class="section" id="projects">
   <h2 class="section-title">Projects</h2>
   <div class="projects-grid">
+
+    <!-- FDE Circle -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(210,153,34,0.12);">🎯</div>
+        <div class="card-links">
+          <a href="https://fdecircle.com" class="card-link" target="_blank" rel="noopener" title="Live site">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <h3>FDE Circle</h3>
+      <span class="card-beta">Private Beta</span>
+      <p>Assessment platform for Forward Deployed Engineers — candidates debug real, broken production systems in live E2B sandboxes, graded by deterministic checks plus an LLM judge. Companies run hiring assessments and source pre-vetted candidates through a unified dashboard.</p>
+      <div class="card-tags">
+        <span class="tag">Next.js</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">E2B</span>
+        <span class="tag">Tailwind CSS</span>
+      </div>
+    </div>
 
     <!-- Speedjot -->
     <div class="card">
